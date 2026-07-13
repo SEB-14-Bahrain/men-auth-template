@@ -9,6 +9,14 @@ const showSignUpForm = (req, res) => {
 }
 
 const signUp = async (req, res) => {
+    const userInDatabase = await User.findOne({
+        username: req.body.username
+    })
+
+    if (userInDatabase) {
+        return res.send('Username already taken.')
+    }
+
     let userData = {}
     userData.username = req.body.username
     userData.password = req.body.password
