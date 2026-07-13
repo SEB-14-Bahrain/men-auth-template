@@ -28,8 +28,19 @@ const signUp = async (req, res) => {
     res.send(user)
 }
 
+const showSignInForm = (req, res) => {
+    res.render('auth/sign-in.ejs')
+}
+
+const signIn = async (req, res) => {
+    console.log(req.body)
+    res.send('sign in route')
+}
+
 module.exports = {
     home,
     showSignUpForm,
     signUp,
+    showSignInForm,
+    signIn,
 }
