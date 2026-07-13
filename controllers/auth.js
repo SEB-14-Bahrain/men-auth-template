@@ -33,7 +33,20 @@ const showSignInForm = (req, res) => {
 }
 
 const signIn = async (req, res) => {
-    console.log(req.body)
+    const userInDatabase = await User.findOne({
+        username: req.body.username
+    })
+
+    if (!userInDatabase) {
+        return res.send('User does not exist.')
+    }
+
+    const validPassword = bcrypt.compareSync(req.body.password, userInDatabase.password)
+
+    if(!validPassword) {
+        return res.send('Login failed. Please try again.')
+    }
+
     res.send('sign in route')
 }
 
