@@ -1,4 +1,5 @@
 const User = require('../models/user')
+const bcrypt = require('bcrypt')
 
 const home = (req, res) => {
     res.send('welcome')
@@ -19,7 +20,9 @@ const signUp = async (req, res) => {
 
     let userData = {}
     userData.username = req.body.username
-    userData.password = req.body.password
+
+    const hashedPassword = bcrypt.hashSync(req.body.password, 10)
+    userData.password = hashedPassword
 
     const user = await User.create(userData)
     res.send(user)
