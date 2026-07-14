@@ -55,10 +55,16 @@ const signIn = async (req, res) => {
     res.redirect('/')
 }
 
+const signOut = async (req, res) => {
+    req.session.destroy()
+    res.redirect('/')
+}
+
 module.exports = {
     home,
     showSignUpForm,
     signUp,
     showSignInForm,
     signIn,
+    signOut,
 }

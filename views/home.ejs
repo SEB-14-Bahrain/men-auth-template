@@ -9,7 +9,9 @@
 <body>
     <% if (user) { %>
         <h1>Welcome to the app <%= user.username %></h1>
-        <a href="">Sign Out</a>
+        <form action="/auth/sign-out?_method=DELETE" method="POST">
+            <button type="submit">Sign Out</button>
+        </form>
     <% } else { %>
         <a href="/auth/sign-up">Sign Up</a>
         <a href="/auth/sign-in">Sign In</a>
