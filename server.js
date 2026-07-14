@@ -49,7 +49,9 @@ app.get('/dashboard', async (req, res) => {
     if (!req.session.user){
         return res.redirect('/auth/sign-in')
     }
-    res.render('dashboard.ejs')
+    res.render('dashboard.ejs', {
+        user: req.session.user
+    })
 })
 
 app.listen(port, () => {
