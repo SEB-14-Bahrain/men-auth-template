@@ -45,6 +45,13 @@ app.get('/auth/sign-in', authCtrl.showSignInForm)
 app.post('/auth/sign-in', authCtrl.signIn)
 app.delete('/auth/sign-out', authCtrl.signOut)
 
+app.get('/dashboard', async (req, res) => {
+    if (!req.session.user){
+        return res.redirect('/auth/sign-in')
+    }
+    res.render('dashboard.ejs')
+})
+
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
 });
