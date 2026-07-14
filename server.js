@@ -6,6 +6,7 @@ const app = express();
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const morgan = require("morgan");
+const session = require('express-session')
 
 const authCtrl = require('./controllers/auth')
 
@@ -25,9 +26,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
 // Morgan for logging HTTP requests
 app.use(morgan('dev'));
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+}))
 
 app.get('/', (req, res) => {
-    res.render('home.ejs')
+    res.render('home.ejs', {
+        user: req.session.user,
+    })
 })
 
 app.get('/auth/home', authCtrl.home)

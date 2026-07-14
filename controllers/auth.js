@@ -47,7 +47,12 @@ const signIn = async (req, res) => {
         return res.send('Login failed. Please try again.')
     }
 
-    res.send('sign in route')
+    req.session.user = {
+        username: userInDatabase.username,
+        _id: userInDatabase._id
+    }
+
+    res.redirect('/')
 }
 
 module.exports = {
