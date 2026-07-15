@@ -25,10 +25,10 @@ const signUp = async (req, res) => {
     userData.password = hashedPassword
 
     const user = await User.create(userData)
-    
+
     req.session.user = {
-        username: userInDatabase.username,
-        _id: userInDatabase._id
+        username: user.username,
+        _id: user._id
     }
     req.session.save(() => {
         res.redirect('/')
