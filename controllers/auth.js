@@ -1,10 +1,6 @@
 const User = require('../models/user')
 const bcrypt = require('bcrypt')
 
-const home = (req, res) => {
-    res.send('welcome')
-}
-
 const showSignUpForm = (req, res) => {
     res.render('auth/sign-up.ejs')
 }
@@ -70,7 +66,6 @@ const signOut = async (req, res) => {
 }
 
 module.exports = {
-    home,
     showSignUpForm,
     signUp,
     showSignInForm,
